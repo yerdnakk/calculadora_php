@@ -22,13 +22,10 @@
         $stored = $out[0];  
     }
     $display = $stored . $pressed;
-    $_SESSION['valor'] = $display;
     if ($pressed == 'C') {
-        $_SESSION['valor'] = $pressed;
         $display = '';
     } elseif ($pressed == '=' && preg_match('~^\d*\.?\d+(?:[*/+-]\d*\.?\d+)*$~', $stored)) {
         $display .= eval("return $stored;");
-        $_SESSION['resultado'] = $display;
     }
 
     echo "<form action=\"\" method=\"POST\">";
