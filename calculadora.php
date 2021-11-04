@@ -1,6 +1,5 @@
 <?php
     session_start();
-    $_SESSION['valores'] = array();
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +14,13 @@
     $pressed = '';
     if (isset($_POST['pressed']) && in_array($_POST['pressed'], $buttons)) {
         $pressed = $_POST['pressed'];
-        array_push($_SESSION['valores'], $_POST['pressed']);
     }
     $stored = '';
     if (isset($_POST['stored']) && preg_match('~^(?:[\d.]+[*/+-]?)+$~', $_POST['stored'], $out)) {
         $stored = $out[0];  
     }
     $display = $stored . $pressed;
+    $_SESSION['valores'] = $display;
     if ($pressed == 'C') {
         $display = '';
     } elseif ($pressed == '=' && preg_match('~^\d*\.?\d+(?:[*/+-]\d*\.?\d+)*$~', $stored)) {
@@ -47,9 +46,8 @@
 
 <div>
     <p>Números, operadores e resultados temporários</p>
-    <?php
-        print_r($_SESSION['valores']);
-    ?>
+    <?= $_SESSION['valores']; ?>
+    
 </div>
 </body>
 </html>
